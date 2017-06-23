@@ -61,14 +61,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eventus\Eventus.csproj">
-      <Project>{15110214-3710-40e3-b3aa-8450c6466568}</Project>
-      <Name>Eventus</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eventus\Eventus.csproj">
+      <Project>{665698b9-cb4a-4a73-9d9a-97eb94beba12}</Project>
+      <Name>Eventus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Azure.DocumentDB.1.13.3\build\Microsoft.Azure.DocumentDB.targets" Condition="Exists('..\packages\Microsoft.Azure.DocumentDB.1.13.3\build\Microsoft.Azure.DocumentDB.targets')" />

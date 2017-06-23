@@ -183,21 +183,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Eventus\Eventus.csproj">
+      <Project>{665698b9-cb4a-4a73-9d9a-97eb94beba12}</Project>
+      <Name>Eventus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eventus.Samples.Contracts\Eventus.Samples.Contracts.csproj">
       <Project>{2a320b66-02ab-4969-90aa-4ecad997badd}</Project>
       <Name>Eventus.Samples.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Eventus.Samples.Core\Eventus.Samples.Core.csproj">
-      <Project>{b0d6e886-4fb4-4297-bd50-c712af24ce7b}</Project>
+      <Project>{dd03fb3f-9771-49be-b5dc-2b9ee1e08ad6}</Project>
       <Name>Eventus.Samples.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Eventus.Samples.Infrastructure\Eventus.Samples.Infrastructure.csproj">
       <Project>{02c0c5dd-ad27-4068-8030-a1e5bd50731e}</Project>
       <Name>Eventus.Samples.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Eventus\Eventus.csproj">
-      <Project>{15110214-3710-40e3-b3aa-8450c6466568}</Project>
-      <Name>Eventus</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

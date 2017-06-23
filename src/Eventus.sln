@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus.Samples.Core", "Samples\Eventus.Samples.Core\Eventus.Samples.Core.csproj", "{B0D6E886-4FB4-4297-BD50-C712AF24CE7B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus", "Eventus\Eventus.csproj", "{15110214-3710-40E3-B3AA-8450C6466568}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus.EventStore", "Eventus.EventSource\Eventus.EventStore.csproj", "{E5FD1A4C-9E79-484A-A44C-B8B5C70145BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus.DocumentDb", "Eventus.DocumentDb\Eventus.DocumentDb.csproj", "{9356C94A-60D6-4854-8E07-02A41B23B731}"
@@ -44,20 +40,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus.Samples.ReadLayer",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus.Samples.Subscribers", "Samples\Eventus.Samples.Subscribers\Eventus.Samples.Subscribers.csproj", "{8C5DDA3F-3E87-4FAB-BE75-6769CC9B166B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus", "Eventus\Eventus.csproj", "{665698B9-CB4A-4A73-9D9A-97EB94BEBA12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventus.Samples.Core", "Samples\Eventus.Samples.Core\Eventus.Samples.Core.csproj", "{DD03FB3F-9771-49BE-B5DC-2B9EE1E08AD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B0D6E886-4FB4-4297-BD50-C712AF24CE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0D6E886-4FB4-4297-BD50-C712AF24CE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0D6E886-4FB4-4297-BD50-C712AF24CE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0D6E886-4FB4-4297-BD50-C712AF24CE7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15110214-3710-40E3-B3AA-8450C6466568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15110214-3710-40E3-B3AA-8450C6466568}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15110214-3710-40E3-B3AA-8450C6466568}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15110214-3710-40E3-B3AA-8450C6466568}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5FD1A4C-9E79-484A-A44C-B8B5C70145BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5FD1A4C-9E79-484A-A44C-B8B5C70145BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5FD1A4C-9E79-484A-A44C-B8B5C70145BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -106,12 +98,19 @@ Global
 		{8C5DDA3F-3E87-4FAB-BE75-6769CC9B166B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C5DDA3F-3E87-4FAB-BE75-6769CC9B166B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C5DDA3F-3E87-4FAB-BE75-6769CC9B166B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{665698B9-CB4A-4A73-9D9A-97EB94BEBA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665698B9-CB4A-4A73-9D9A-97EB94BEBA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665698B9-CB4A-4A73-9D9A-97EB94BEBA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665698B9-CB4A-4A73-9D9A-97EB94BEBA12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD03FB3F-9771-49BE-B5DC-2B9EE1E08AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD03FB3F-9771-49BE-B5DC-2B9EE1E08AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD03FB3F-9771-49BE-B5DC-2B9EE1E08AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD03FB3F-9771-49BE-B5DC-2B9EE1E08AD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B0D6E886-4FB4-4297-BD50-C712AF24CE7B} = {C8D1A53A-2E83-4CB8-9621-205D2A376E4F}
 		{85AC6BB7-D1AD-4DB6-8B6A-76822073D226} = {75C36474-611B-44B3-A48E-392C364EC27B}
 		{71F6058B-41FF-4F08-A461-32F73F03BAAC} = {C8D1A53A-2E83-4CB8-9621-205D2A376E4F}
 		{02C0C5DD-AD27-4068-8030-A1E5BD50731E} = {C8D1A53A-2E83-4CB8-9621-205D2A376E4F}
@@ -121,5 +120,6 @@ Global
 		{D7E2B10B-51F6-4897-868A-2EE0510A188D} = {C8D1A53A-2E83-4CB8-9621-205D2A376E4F}
 		{E0331FFC-E30A-4E8C-919D-AA99BE0AD52B} = {C8D1A53A-2E83-4CB8-9621-205D2A376E4F}
 		{8C5DDA3F-3E87-4FAB-BE75-6769CC9B166B} = {C8D1A53A-2E83-4CB8-9621-205D2A376E4F}
+		{DD03FB3F-9771-49BE-B5DC-2B9EE1E08AD6} = {C8D1A53A-2E83-4CB8-9621-205D2A376E4F}
 	EndGlobalSection
 EndGlobal

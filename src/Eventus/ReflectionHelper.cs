@@ -56,8 +56,8 @@ namespace Eventus
             return type.GetRuntimeMethods().Where(m =>
             {
                 //ignore properties
-                if (m.Name.StartsWith("get_", StringComparison.InvariantCultureIgnoreCase) ||
-                    m.Name.StartsWith("set_", StringComparison.InvariantCultureIgnoreCase))
+                if (m.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase) ||
+                    m.Name.StartsWith("set_", StringComparison.OrdinalIgnoreCase))
                     return false;
 
                 //does the return type match
@@ -68,13 +68,13 @@ namespace Eventus
                 //based on the matchParameterInheritance switch
                 var parameters = m.GetParameters();
 
-                if ((parameterTypes == null || parameterTypes.Length == 0))
+                if (parameterTypes == null || parameterTypes.Length == 0)
                     return parameters.Length == 0;
 
                 if (parameters.Length != parameterTypes.Length)
                     return false;
 
-                return !parameterTypes.Where((t, i) => (parameters[i].ParameterType == t || matchParameterInheritance && t.IsAssignableFrom(parameters[i].ParameterType)) == false).Any();
+                return !parameterTypes.Where((t, i) => (parameters[i].ParameterType == t || matchParameterInheritance && t.GetTypeInfo().IsSubclassOf(parameters[i].ParameterType)) == false).Any();
             });
         }
     }

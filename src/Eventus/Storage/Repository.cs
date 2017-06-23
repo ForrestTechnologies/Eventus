@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Eventus.Domain;
 using Eventus.EventBus;
@@ -31,7 +32,7 @@ namespace Eventus.Storage
         public async Task<TAggregate> GetByIdAsync<TAggregate>(Guid id) where TAggregate : Aggregate
         {
             var item = default(TAggregate);
-            var isSnapshottable = typeof(ISnapshottable).IsAssignableFrom(typeof(TAggregate));
+            var isSnapshottable = typeof(ISnapshottable).GetTypeInfo().IsAssignableFrom(typeof(TAggregate));
             Snapshot snapshot = null;
 
             if (isSnapshottable)

@@ -20,7 +20,7 @@ namespace Eventus
 
             var aggregateType = typeof(Aggregate);
             var types = assemblies.SelectMany(t => t.GetTypes())
-                .Where(t => t != aggregateType && aggregateType.IsAssignableFrom(t));
+                .Where(t => t != aggregateType && aggregateType.GetTypeInfo().IsSubclassOf(t));
 
             return types;
         }

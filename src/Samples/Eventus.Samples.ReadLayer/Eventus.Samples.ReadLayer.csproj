@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,7 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Eventus\Eventus.csproj" />
     <ProjectReference Include="..\Eventus.Samples.Contracts\Eventus.Samples.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Eventus.Samples.Contracts">
+      <HintPath>..\Eventus.Samples.Contracts\bin\Debug\netstandard1.4\Eventus.Samples.Contracts.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

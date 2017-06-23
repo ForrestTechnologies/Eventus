@@ -15,12 +15,12 @@ namespace Eventus.Test
             //get all events in all assemblies
             var eventType = typeof(Event);
             var events = domainAssemblies.SelectMany(a => a.GetTypes())
-                .Where(t => t != eventType && eventType.IsAssignableFrom(t));
+                .Where(t => t != eventType && eventType.GetTypeInfo().IsAssignableFrom(t));
 
             //get all aggregates
             var aggregateType = typeof(Aggregate);
             var aggregates = domainAssemblies.SelectMany(a => a.GetTypes())
-                .Where(t => t != aggregateType && aggregateType.IsAssignableFrom(t));
+                .Where(t => t != aggregateType && aggregateType.GetTypeInfo().IsAssignableFrom(t));
 
             //get aggregate apply methods
             var aggregateMethods = aggregates.SelectMany(a => a.GetMethodsBySig(typeof(void), true, typeof(IEvent)))
