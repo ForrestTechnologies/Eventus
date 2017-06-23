@@ -4,37 +4,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Eventus.Events;
+using Eventus.Exceptions;
 
 namespace Eventus
 {
     internal static class ReflectionHelper
     {
-        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<Type, string>> AggregateEventHandlerCache =
-                new ConcurrentDictionary<Type, ConcurrentDictionary<Type, string>>();
+        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<Type, MethodInfo>> AggregateEventHandlerCache =
+                new ConcurrentDictionary<Type, ConcurrentDictionary<Type, MethodInfo>>();
 
-        public static Dictionary<Type, string> FindEventHandlerMethodsInAggregate(Type aggregateType)
+        internal static Dictionary<Type, MethodInfo> FindEventHandlerMethodsInAggregate(Type aggregateType)
         {
             if (AggregateEventHandlerCache.ContainsKey(aggregateType) == false)
             {
-                var eventHandlers = new ConcurrentDictionary<Type, string>();
+                var eventHandlers = new ConcurrentDictionary<Type, MethodInfo>();
 
-                var methods = aggregateType.GetMethodsBySig(typeof(void), true, typeof(IEvent)).ToList();
+                var methods = aggregateType.GetTypeInfo().GetMethodsBySig(typeof(void), true, typeof(IEvent)).ToList();
 
                 if (methods.Any())
                 {
                     foreach (var m in methods)
                     {
                         var parameter = m.GetParameters().First();
-                        if (eventHandlers.TryAdd(parameter.ParameterType, m.Name) == false)
+                        if (eventHandlers.TryAdd(parameter.ParameterType, m) == false)
                         {
-                            throw new TargetException($"Multiple methods found handling same event in {aggregateType.Name}");
+                            throw new AggregateMethodException($"Multiple methods found handling same event in {aggregateType.Name}");
                         }
                     }
                 }
 
                 if (AggregateEventHandlerCache.TryAdd(aggregateType, eventHandlers) == false)
                 {
-                    throw new TargetException($"Error registering methods for handling events in {aggregateType.Name}");
+                    throw new AggregateMethodException($"Error registering methods for handling events in {aggregateType.Name}");
                 }
             }
 
@@ -42,18 +43,13 @@ namespace Eventus
             return AggregateEventHandlerCache[aggregateType].ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
-        public static MethodInfo GetMethod(Type t, string methodName, Type[] paramTypes)
-        {
-            return t.GetRuntimeMethod(methodName, paramTypes);
-        }
-
-        public static IEnumerable<MethodInfo> GetMethodsBySig(this Type type,
+        internal static IEnumerable<MethodInfo> GetMethodsBySig(this TypeInfo type,
             Type returnType,
             bool matchParameterInheritance,
             params Type[] parameterTypes)
         {
 
-            return type.GetRuntimeMethods().Where(m =>
+            return type.DeclaredMethods.Where(m =>
             {
                 //ignore properties
                 if (m.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase) ||
@@ -74,7 +70,7 @@ namespace Eventus
                 if (parameters.Length != parameterTypes.Length)
                     return false;
 
-                return !parameterTypes.Where((t, i) => (parameters[i].ParameterType == t || matchParameterInheritance && t.GetTypeInfo().IsSubclassOf(parameters[i].ParameterType)) == false).Any();
+                return !parameterTypes.Where((t, i) => (parameters[i].ParameterType == t || matchParameterInheritance && t.GetTypeInfo().IsAssignableFrom(parameters[i].ParameterType.GetTypeInfo())) == false).Any();
             });
         }
     }

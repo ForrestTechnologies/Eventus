@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Eventus.Events;
 using Eventus.Exceptions;
 
@@ -16,7 +17,7 @@ namespace Eventus.Domain
         }
 
         private readonly List<IEvent> _uncommittedChanges;
-        private Dictionary<Type, string> _eventHandlerCache;
+        private Dictionary<Type, MethodInfo> _eventHandlerCache;
 
         protected Aggregate(List<IEvent> uncommittedChanges)
         {
@@ -80,10 +81,7 @@ namespace Eventus.Domain
         {
             if (_eventHandlerCache.ContainsKey(@event.GetType()))
             {
-                var methodName = _eventHandlerCache[@event.GetType()];
-
-                //todo cache method info instead of name
-                var method = ReflectionHelper.GetMethod(GetType(), methodName, new[] { @event.GetType() });
+                var method = _eventHandlerCache[@event.GetType()];
 
                 if (method != null)
                 {

@@ -1,11 +1,10 @@
 using System;
-using System.Reflection;
 
 namespace Eventus.DocumentDb.Config
 {
     public class AggregateConfig
     {
-        public AggregateConfig(TypeInfo aggregateType, int offerThroughput, int snapshotThroughput)
+        public AggregateConfig(Type aggregateType, int offerThroughput, int snapshotThroughput)
         {
             if (offerThroughput <= 0) throw new ArgumentOutOfRangeException(nameof(offerThroughput));
             if (snapshotThroughput <= 0) throw new ArgumentOutOfRangeException(nameof(snapshotThroughput));
@@ -15,7 +14,7 @@ namespace Eventus.DocumentDb.Config
             SnapshotOfferThroughput = snapshotThroughput;
         }
 
-        public TypeInfo AggregateType { get; }
+        public Type AggregateType { get; }
 
         public int SnapshotOfferThroughput { get; }
 

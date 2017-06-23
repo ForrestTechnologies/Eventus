@@ -41,7 +41,7 @@ namespace Eventus.DocumentDb
         
         protected static string GetClrTypeName(object item)
         {
-            return TypeHelper.GetClrTypeName(item);
+            return item.GetType() + "," + item.GetType().Assembly.GetName().Name;
         }
 
         protected static string SnapshotCollectionName(Type aggregateType)

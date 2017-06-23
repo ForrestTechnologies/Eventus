@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -46,15 +47,26 @@ namespace Eventus.SqlServer
 
         protected static string GetClrTypeName(object item)
         {
-            return item.GetType() + "," + item.GetType().Assembly.GetName().Name;
+            return TypeHelper.GetClrTypeName(item);
         }
 
         protected static string TableName(Type aggregateType)
+        {
+            return TableName(aggregateType.GetTypeInfo());
+        }
+
+
+        protected static string TableName(TypeInfo aggregateType)
         {
             return aggregateType.Name;
         }
 
         protected static string SnapshotTableName(Type aggregateType)
+        {
+            return SnapshotTableName(aggregateType.GetTypeInfo());
+        }
+
+        protected static string SnapshotTableName(TypeInfo aggregateType)
         {
             return $"{aggregateType.Name}_Snapshot";
         }

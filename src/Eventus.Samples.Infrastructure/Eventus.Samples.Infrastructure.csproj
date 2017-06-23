@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.0.0-alpha-1" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Eventus.DocumentDb\Eventus.DocumentDb.csproj" />
+    <ProjectReference Include="..\Eventus.EventStore\Eventus.EventStore.csproj" />
+    <ProjectReference Include="..\Eventus.SqlServer\Eventus.SqlServer.csproj" />
+    <ProjectReference Include="..\Eventus\Eventus.csproj" />
+    <ProjectReference Include="..\Samples\Eventus.Samples.Core\Eventus.Samples.Core.csproj" />
+  </ItemGroup>
+
+</Project>

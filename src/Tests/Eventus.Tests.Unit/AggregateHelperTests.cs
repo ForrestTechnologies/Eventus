@@ -12,7 +12,7 @@ namespace Eventus.Tests.Unit
         [Fact]
         public void GetAggregateTypes_should_throw_exception_if_assemblies_is_null()
         {
-            Action action = () => AggregateHelper.GetAggregateTypes((Assembly)null);
+            Action action = () => AggregateHelper.GetAggregateTypes((List<Assembly>)null);
 
             action.ShouldThrow<ArgumentNullException>();
         }

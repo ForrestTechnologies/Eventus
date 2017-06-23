@@ -32,7 +32,7 @@ namespace Eventus.Storage
         public async Task<TAggregate> GetByIdAsync<TAggregate>(Guid id) where TAggregate : Aggregate
         {
             var item = default(TAggregate);
-            var isSnapshottable = typeof(ISnapshottable).GetTypeInfo().IsAssignableFrom(typeof(TAggregate));
+            var isSnapshottable = typeof(ISnapshottable).GetTypeInfo().IsAssignableFrom(typeof(TAggregate).GetTypeInfo());
             Snapshot snapshot = null;
 
             if (isSnapshottable)
@@ -150,7 +150,7 @@ namespace Eventus.Storage
 
         private static TAggregate ConstructAggregate<TAggregate>()
         {
-            return (TAggregate)Activator.CreateInstance(typeof(TAggregate), true);
+            return (TAggregate)Activator.CreateInstance(typeof(TAggregate));
         }
     }
 }

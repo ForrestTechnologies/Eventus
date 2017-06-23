@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="dapper" Version="1.50.2" />
-    <PackageReference Include="newtonsoft.json" Version="10.0.3" />
+    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.0.0-alpha-1" />
   </ItemGroup>
 
   <ItemGroup>

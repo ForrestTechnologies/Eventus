@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Eventus.Samples.CommandProcessor</RootNamespace>
     <AssemblyName>Eventus.Samples.CommandProcessor</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -183,6 +184,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Eventus.Samples.Infrastructure\Eventus.Samples.Infrastructure.csproj">
+      <Project>{a23db4f5-469d-4b3b-8c87-357133e01511}</Project>
+      <Name>Eventus.Samples.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Eventus\Eventus.csproj">
       <Project>{665698b9-cb4a-4a73-9d9a-97eb94beba12}</Project>
       <Name>Eventus</Name>
@@ -194,10 +199,6 @@
     <ProjectReference Include="..\Eventus.Samples.Core\Eventus.Samples.Core.csproj">
       <Project>{dd03fb3f-9771-49be-b5dc-2b9ee1e08ad6}</Project>
       <Name>Eventus.Samples.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Eventus.Samples.Infrastructure\Eventus.Samples.Infrastructure.csproj">
-      <Project>{02c0c5dd-ad27-4068-8030-a1e5bd50731e}</Project>
-      <Name>Eventus.Samples.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

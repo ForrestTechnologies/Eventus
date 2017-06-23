@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Eventus.Tests.Integration</RootNamespace>
     <AssemblyName>Eventus.Tests.Integration</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,7 @@
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -72,6 +74,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Eventus.DocumentDb\Eventus.DocumentDb.csproj">
+      <Project>{78cd0506-eae9-4773-be1c-1da3e07957a5}</Project>
+      <Name>Eventus.DocumentDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Eventus.EventStore\Eventus.EventStore.csproj">
+      <Project>{b339f3a6-9287-4323-b5d9-8a2e4ff19c16}</Project>
+      <Name>Eventus.EventStore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Eventus.Samples.Infrastructure\Eventus.Samples.Infrastructure.csproj">
+      <Project>{a23db4f5-469d-4b3b-8c87-357133e01511}</Project>
+      <Name>Eventus.Samples.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Eventus.SqlServer\Eventus.SqlServer.csproj">
+      <Project>{c6d8793d-69c8-4d48-82bf-7cc6bade3e61}</Project>
+      <Name>Eventus.SqlServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Eventus\Eventus.csproj">
       <Project>{665698b9-cb4a-4a73-9d9a-97eb94beba12}</Project>
       <Name>Eventus</Name>
@@ -80,9 +98,9 @@
       <Project>{2a320b66-02ab-4969-90aa-4ecad997badd}</Project>
       <Name>Eventus.Samples.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Samples\Eventus.Samples.Infrastructure\Eventus.Samples.Infrastructure.csproj">
-      <Project>{02C0C5DD-AD27-4068-8030-A1E5BD50731E}</Project>
-      <Name>Eventus.Samples.Infrastructure</Name>
+    <ProjectReference Include="..\..\Samples\Eventus.Samples.Core\Eventus.Samples.Core.csproj">
+      <Project>{dd03fb3f-9771-49be-b5dc-2b9ee1e08ad6}</Project>
+      <Name>Eventus.Samples.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Eventus.DocumentDb.Config;
 using Eventus.Storage;
@@ -37,14 +36,14 @@ namespace Eventus.DocumentDb
             }
         }
 
-        protected virtual IEnumerable<TypeInfo> DetectAggregates()
+        protected virtual IEnumerable<Type> DetectAggregates()
         {
             var assemblies = _config.DomainAssemblies;
 
             return AggregateHelper.GetAggregateTypes(assemblies);
         }
 
-        protected virtual IEnumerable<AggregateConfig> BuildAggregateConfigs(IEnumerable<TypeInfo> aggregateTypes)
+        protected virtual IEnumerable<AggregateConfig> BuildAggregateConfigs(IEnumerable<Type> aggregateTypes)
         {
             var aggregateConfigs = aggregateTypes.Select(t => new AggregateConfig(t, _config.DefaultThroughput, _config.DefaultSnapshotThroughput));
 
@@ -140,7 +139,7 @@ namespace Eventus.DocumentDb
             return null;
         }
 
-        protected virtual string SnapshotCollectionName(TypeInfo aggregateType)
+        protected virtual string SnapshotCollectionName(Type aggregateType)
         {
             return $"{aggregateType.Name}-snapshot";
         }

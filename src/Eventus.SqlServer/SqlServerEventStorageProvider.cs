@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
-using System.Transactions;
 using Dapper;
 using Eventus.Domain;
 using Eventus.Events;
@@ -60,7 +61,7 @@ namespace Eventus.SqlServer
 
                 using (connection)
                 {
-                    using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                    using (var transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted))
                     {
                         foreach (var @event in events)
                         {
@@ -77,7 +78,8 @@ namespace Eventus.SqlServer
                                 Data = SerializeEvent(@event)
                             }).ConfigureAwait(false);
                         }
-                        transactionScope.Complete();
+
+                        transaction.Commit();
                     }
                 }
             }

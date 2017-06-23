@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Eventus.Cleanup;
-using Respawn;
+using Eventus.SqlServer.Teardown;
 
 namespace Eventus.SqlServer
 {

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
+using Eventus.Samples.Infrastructure;
 using Eventus.Samples.Infrastructure.Factories;
+using Eventus.Samples.Infrastructure.Factories.Providers;
 using Xunit;
 
 namespace Eventus.Tests.Integration
@@ -10,6 +13,9 @@ namespace Eventus.Tests.Integration
         public StorageProviderFixture()
         {
             SetupAsync().Wait();
+            ProviderFactory.SetProvider(ConfigurationManager.AppSettings[Constants.Provider].ToUpperInvariant());
+            //todo find a nicer way to do this
+            SqlServerProviderFactory.ConnectionString = ConfigurationManager.ConnectionStrings["Eventus"].ToString();
         }
 
         private static Task SetupAsync()

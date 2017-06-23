@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
-using System.Transactions;
 using Dapper;
-using Eventus.Domain;
 using Eventus.SqlServer.Config;
 using Eventus.Storage;
 
@@ -30,7 +28,7 @@ namespace Eventus.SqlServer
 
             using (connection)
             {
-                using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                using (var transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
                     foreach (var aggregateConfig in aggregates)
                     {
@@ -39,19 +37,19 @@ namespace Eventus.SqlServer
                         await CreateSnapshotTableForAggregateAsync(connection, aggregateConfig).ConfigureAwait(false);
                     }
 
-                    transactionScope.Complete();
+                    transaction.Commit();
                 }
             }
         }
 
-        protected virtual IEnumerable<Type> DetectAggregates()
+        protected virtual IEnumerable<TypeInfo> DetectAggregates()
         {
             var assemblies = _config.DomainAssemblies;
 
             return AggregateHelper.GetAggregateTypes(assemblies);
         }
 
-        protected virtual IEnumerable<AggregateConfig> BuildAggregateConfigs(IEnumerable<Type> aggregateTypes)
+        protected virtual IEnumerable<AggregateConfig> BuildAggregateConfigs(IEnumerable<TypeInfo> aggregateTypes)
         {
             var aggregateConfigs = aggregateTypes.Select(t => new AggregateConfig(t));
 

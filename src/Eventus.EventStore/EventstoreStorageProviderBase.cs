@@ -89,9 +89,9 @@ namespace Eventus.EventStore
                 Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(header, GetSerializerSettings())));
         }
 
-        private static string GetClrTypeName(object @event)
+        private static string GetClrTypeName(object item)
         {
-            return @event.GetType() + "," + @event.GetType().Assembly.GetName().Name;
+            return TypeHelper.GetClrTypeName(item);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Eventus.EventStore
         {
             var streamEvents = new List<ResolvedEvent>();
             StreamEventsSlice currentSlice;
-            var nextSliceStart = start < 0 ? StreamPosition.Start : start;
+            long nextSliceStart = start < 0 ? StreamPosition.Start : start;
 
             //Read the stream using pagesize which was set before.
             //We only need to read the full page ahead if expected results are larger than the page size
@@ -91,7 +91,7 @@ namespace Eventus.EventStore
 
                 return Connection.AppendToStreamAsync(
                     $"{AggregateIdToStreamName(aggregate.GetType(), aggregate.Id)}",
-                    (lastVersion < 0 ? ExpectedVersion.NoStream : lastVersion),
+                    lastVersion < 0 ? ExpectedVersion.NoStream : lastVersion,
                     lstEventData);
             }
 
