@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Eventus.Events;
 
 namespace Eventus
@@ -45,7 +44,7 @@ namespace Eventus
 
         public static MethodInfo GetMethod(Type t, string methodName, Type[] paramTypes)
         {
-            return t.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance, null, paramTypes, null);
+            return t.GetRuntimeMethod(methodName, paramTypes);
         }
 
         public static IEnumerable<MethodInfo> GetMethodsBySig(this Type type,
@@ -53,16 +52,20 @@ namespace Eventus
             bool matchParameterInheritance,
             params Type[] parameterTypes)
         {
-            return type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Where((m) =>
+
+            return type.GetRuntimeMethods().Where(m =>
             {
                 //ignore properties
                 if (m.Name.StartsWith("get_", StringComparison.InvariantCultureIgnoreCase) ||
                     m.Name.StartsWith("set_", StringComparison.InvariantCultureIgnoreCase))
                     return false;
 
+                //does the return type match
                 if (m.ReturnType != returnType)
                     return false;
 
+                //does the method have the same number of parameters that are either the same type or assignable from the passed in parameter types 
+                //based on the matchParameterInheritance switch
                 var parameters = m.GetParameters();
 
                 if ((parameterTypes == null || parameterTypes.Length == 0))

@@ -46,9 +46,9 @@ namespace Eventus.SqlServer
 
         protected virtual IEnumerable<Type> DetectAggregates()
         {
-            var aggregateTypes = AggregateHelper.GetAggregateTypes();
+            var assemblies = _config.DomainAssemblies;
 
-            return aggregateTypes;
+            return AggregateHelper.GetAggregateTypes(assemblies);
         }
 
         protected virtual IEnumerable<AggregateConfig> BuildAggregateConfigs(IEnumerable<Type> aggregateTypes)

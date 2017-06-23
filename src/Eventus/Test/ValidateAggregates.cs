@@ -12,7 +12,7 @@ namespace Eventus.Test
     {
         public static void AssertThatAggregatesSupportAllEvents(params Assembly[] domainAssemblies)
         {
-            //get all events in all assemlies
+            //get all events in all assemblies
             var eventType = typeof(Event);
             var events = domainAssemblies.SelectMany(a => a.GetTypes())
                 .Where(t => t != eventType && eventType.IsAssignableFrom(t));

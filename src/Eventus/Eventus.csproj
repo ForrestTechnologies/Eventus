@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;LIBLOG_PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -57,6 +57,7 @@
     <Compile Include="Exceptions\ConcurrencyException.cs" />
     <Compile Include="Events\Event.cs" />
     <Compile Include="Exceptions\AggregateCreationException.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Logging\EventStorageProviderLoggingDecorator.cs" />
     <Compile Include="Logging\LoggingDecorator.cs" />
     <Compile Include="Logging\LoggingExtensions.cs" />

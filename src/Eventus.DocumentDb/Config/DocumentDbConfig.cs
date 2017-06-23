@@ -1,15 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Eventus.DocumentDb.Config
 {
     public class DocumentDbConfig
     {
-        public DocumentDbConfig(string databaseId, int defaultThroughput, int defaultSnapshotThroughput)
+        public DocumentDbConfig(string databaseId, Assembly assembly) : this(databaseId, new List<Assembly> { assembly })
+        {}
+
+        public DocumentDbConfig(string databaseId, List<Assembly> domainAssemblies)
         {
+            DomainAssemblies = domainAssemblies ?? throw new ArgumentNullException(nameof(domainAssemblies));
             DatabaseId = databaseId ?? throw new ArgumentNullException(nameof(databaseId));
-            DefaultThroughput = defaultThroughput;
-            DefaultSnapshotThroughput = defaultSnapshotThroughput;
+            DefaultThroughput = 400;
+            DefaultSnapshotThroughput = 400;
 
             PartitionKey = "/aggregateId";
             ExcludePaths = new List<string>
@@ -23,9 +28,11 @@ namespace Eventus.DocumentDb.Config
 
         public string DatabaseId { get; }
 
-        public int DefaultThroughput { get; }
+        public List<Assembly> DomainAssemblies { get; }
 
-        public int DefaultSnapshotThroughput { get; }
+        public int DefaultThroughput { get; set; }
+
+        public int DefaultSnapshotThroughput { get; set; }
 
         public string PartitionKey { get; set; }
 

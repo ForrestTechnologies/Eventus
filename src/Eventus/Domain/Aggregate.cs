@@ -82,6 +82,7 @@ namespace Eventus.Domain
             {
                 var methodName = _eventHandlerCache[@event.GetType()];
 
+                //todo cache method info instead of name
                 var method = ReflectionHelper.GetMethod(GetType(), methodName, new[] { @event.GetType() });
 
                 if (method != null)

@@ -1,6 +1,9 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Reflection;
 using System.Threading.Tasks;
 using Eventus.Cleanup;
+using Eventus.Samples.Core.Domain;
 using Eventus.SqlServer;
 using Eventus.SqlServer.Config;
 using Eventus.Storage;
@@ -33,7 +36,7 @@ namespace Eventus.Samples.Infrastructure.Factories.Providers
 
         public override Task InitAsync()
         {
-            var init = new SqlProviderInitialiser(new SqlServerConfig(_connectionString));
+            var init = new SqlProviderInitialiser(new SqlServerConfig(_connectionString, Assembly.GetAssembly(typeof(BankAccount))));
             return init.InitAsync();
         }
     }

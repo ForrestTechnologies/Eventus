@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Eventus.DocumentDb.Config;
-using Eventus.Domain;
 using Eventus.Storage;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -40,9 +38,9 @@ namespace Eventus.DocumentDb
 
         protected virtual IEnumerable<Type> DetectAggregates()
         {
-            var aggregateTypes = AggregateHelper.GetAggregateTypes();
+            var assemblies = _config.DomainAssemblies;
 
-            return aggregateTypes;
+            return AggregateHelper.GetAggregateTypes(assemblies);
         }
 
         protected virtual IEnumerable<AggregateConfig> BuildAggregateConfigs(IEnumerable<Type> aggregateTypes)

@@ -6,7 +6,7 @@ namespace Eventus.Logging
 {
     public abstract class LoggingDecorator
     {
-        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
+        private static readonly ILog Logger = LogProvider.For<LoggingDecorator>();
 
         protected abstract string TypeName { get; }
 

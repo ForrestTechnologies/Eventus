@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Configuration;
+using System.Reflection;
 using System.Threading.Tasks;
 using Eventus.Cleanup;
 using Eventus.DocumentDb;
 using Eventus.DocumentDb.Config;
 using Eventus.Logging;
+using Eventus.Samples.Core.Domain;
 using Eventus.Storage;
 using Microsoft.Azure.Documents.Client;
 
@@ -40,7 +42,7 @@ namespace Eventus.Samples.Infrastructure.Factories.Providers
 
         public override Task InitAsync()
         {
-            var init = new DocumentDbInitialiser(Client, new DocumentDbConfig(DatabaseId, 400, 400));
+            var init = new DocumentDbInitialiser(Client, new DocumentDbConfig(DatabaseId, Assembly.GetAssembly(typeof(BankAccount))));
             return init.InitAsync();
         }
 

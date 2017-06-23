@@ -12,7 +12,7 @@ namespace Eventus.Storage
 {
     public class Repository : IRepository
     {
-        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
+        private static readonly ILog Logger = LogProvider.For<Repository>();
 
         private readonly IEventStorageProvider _eventStorageProvider;
         private readonly ISnapshotStorageProvider _snapshotStorageProvider;
