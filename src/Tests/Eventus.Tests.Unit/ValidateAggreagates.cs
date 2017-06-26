@@ -17,6 +17,7 @@ namespace Eventus.Tests.Unit
             ValidateAggregates.AssertThatAggregatesSupportAllEvents(Assembly.GetAssembly(typeof(BankAccount)));
         }
 
+        //todo add tests for the reflection helper and type helper (maybe move type helper methods to reflection helper, call it something else ??
         [Fact]
         public void Validate_that_events_without_methods_throw_exception()
         {

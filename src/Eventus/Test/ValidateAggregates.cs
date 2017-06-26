@@ -29,7 +29,7 @@ namespace Eventus.Test
 
             foreach (var @event in events)
             {
-                var noMethodForType = aggregateMethods.All(m => m.ParameterType.GetTypeInfo().Equals(@event));
+                var noMethodForType = aggregateMethods.All(m => !m.ParameterType.GetTypeInfo().Equals(@event));
 
                 if (noMethodForType)
                 {
